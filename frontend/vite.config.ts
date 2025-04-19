@@ -31,6 +31,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/oracle/, ''),
       },
+      '/api/xrpl-proxy': {
+        target: 'http://xrpl-node:6006',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/xrpl-proxy/, ''),
+      },
     },
   },
   define: {

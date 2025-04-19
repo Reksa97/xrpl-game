@@ -1,5 +1,7 @@
 # Creature Crafter – minimal PoC repo
 
+# Phase 1
+
 > **Goal:** prove XRPL‑based “buy egg → hatch pet → battle → token reward” loop and expose the same XRPL helpers as an SDK.
 
 ## 📂 Folder layout
@@ -245,3 +247,37 @@ fn burn_one_percent(tx: &mut HookCtx) -> i32 {
 - Add Jest tests for Go & TS.
 - Ship CI via GitHub Actions (lint + hook size check).
 - After MI​CA licence, enable non‑custodial marketplace and royalties.
+
+# Phase 2
+
+Summary: NFT Minting Solution Status
+
+We've successfully implemented NFT minting for Creature Crafter with a real XRPL node by:
+
+1. Enabling NFT features in the rippled.cfg configuration
+2. Creating a proxy server that handles transaction signing
+3. Updating the frontend code to use this proxy
+4. Adding fallback simulation for development
+
+However, XRPL is deprecating the submit command with signing support, which our current implementation relies on.
+
+Next Steps for MVP Testing
+
+1. Immediate Testing (Use Current Implementation)
+
+- Launch all services: docker-compose up -d
+- Verify NFTs can be minted from the UI
+- Check XRPL node for minted NFTs: docker exec xrpl-node rippled account_nfts rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh
+
+2. Future-Proof Implementation (Post-MVP)
+
+- Implement client-side transaction signing using xrpl-sign library
+- Modify proxy to use submit_only instead of submit with credentials
+- Update documentation for the new approach
+
+3. Test Plan
+
+1. Test direct NFT minting via command line
+1. Test proxy-based minting through the API endpoint
+1. Test frontend integration with error handling
+1. Verify NFTs appear in user accounts

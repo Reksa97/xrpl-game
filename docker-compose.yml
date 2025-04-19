@@ -4,19 +4,14 @@ services:
     image: xrpllabsofficial/xrpld:latest
     platform: linux/amd64  # Required for Apple silicon
     container_name: xrpl-node
-    command: -a --start --conf /config/rippled.cfg --validators-file /config/validators.txt  # Run in standalone mode with our config and force start amendments
+    command: -a --start  # Run in standalone mode and force start amendments
     ports:
-      - "6006:6006"      # WebSocket admin API (must match the port in the frontend URL)
-      - "5005:5005"      # WebSocket public API 
+      - "6006:6006"      # Admin API
+      - "5005:5005"      # Public API 
       - "8080:80"        # JSON-RPC API
       - "51235:51235"    # Peer port
     volumes:
       - ./xrpl-config:/config
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:6006"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
     networks:
       - xrpl-net
 
@@ -31,12 +26,28 @@ services:
     ports:
       - "3000:3000"
     environment:
-      # Set XRPL WebSocket connection info (container names work as DNS in Docker networks)
       - VITE_XRPL_WS=ws://localhost:5005
+      - VITE_XRPL_HTTP=http://localhost:6006
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - VITE_EGG_SHOP_ADDR=rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh
       - VITE_LOCAL_DEVELOPMENT=true
       - VITE_XRPL_DEBUG=true
+      - VITE_ENABLE_PROXY=true
+    depends_on:
+      - xrpl-node
+    networks:
+      - xrpl-net
+  
+  # Proxy server for XRPL signing
+  proxy:
+    image: node:18
+    container_name: xrpl-proxy
+    working_dir: /app
+    command: sh -c "node server.js"
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3001:3001"
     depends_on:
       - xrpl-node
     networks:

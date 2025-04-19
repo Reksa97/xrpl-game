@@ -228,7 +228,7 @@ export async function getClient(): Promise<XrplClient> {
   try {
     if (!client) {
       // Due to port mapping issues in Docker, we need to use the admin port
-      const url = 'ws://localhost:5005'; // Connect to admin WebSocket API
+      const url = "ws://localhost:5005";;; // Connect to admin WebSocket API
       
       console.log(`Connecting to XRPL node at: ${url}`);
       
