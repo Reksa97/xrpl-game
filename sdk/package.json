@@ -1,0 +1,29 @@
+{
+  "name": "@xrpl/creature-crafter-sdk",
+  "version": "0.1.0",
+  "description": "SDK for XRPL-based NFT games",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "xrpl",
+    "xrp",
+    "blockchain",
+    "nft",
+    "gaming"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "xrpl": "^2.12.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "xrpl": "^2.12.0"
+  }
+}

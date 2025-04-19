@@ -1,0 +1,6 @@
+[validators]
+nHBidG3pZK11zQD6kpNDoAhDxH6WLGuKw2Rhky5BgwwCxv49c8im
+
+[validator_list_sites]
+
+[validator_list_keys]
