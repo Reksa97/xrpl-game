@@ -143,37 +143,75 @@ Troubleshooting steps:
 // Create a test wallet for the user
 export async function createTestWallet(): Promise<Wallet> {
   try {
-    // Get the client
-    const client = await getClient();
-    
     try {
-      // Try to generate a random wallet for testing
-      const walletResponse = await client.request('wallet_generate');
-      
-      console.log('Wallet generation response:', JSON.stringify(walletResponse));
-      
-      if (walletResponse.result && walletResponse.result.account_id && walletResponse.result.master_seed) {
-        const wallet: Wallet = {
-          address: walletResponse.result.account_id,
-          seed: walletResponse.result.master_seed
-        };
-        
-        console.log(`Created test wallet: ${wallet.address}`);
-        return wallet;
-      } else {
-        console.warn('Invalid wallet generation response format:', walletResponse);
-        throw new Error('Invalid wallet generation response');
+      // First check if we have a wallet in localStorage
+      const storedWallet = await loadStoredWallet();
+      if (storedWallet) {
+        console.log(`Using stored wallet: ${storedWallet.address}`);
+        return storedWallet;
       }
+      
+      // Try to generate a random wallet using a simple algorithm
+      // This is for demo purposes only - in production use a proper crypto library
+      console.log('Generating new demo wallet');
+      
+      // Generate a pseudorandom address and seed (simplified for demo)
+      const randomChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      
+      // Generate pseudorandom seed starting with 's'
+      let seed = 's';
+      for (let i = 0; i < 28; i++) {
+        seed += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+      }
+      
+      // Generate pseudorandom address starting with 'r'
+      let address = 'r';
+      for (let i = 0; i < 33; i++) {
+        address += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+      }
+      
+      const wallet: Wallet = {
+        address,
+        seed
+      };
+      
+      console.log(`Created demo wallet: ${wallet.address}`);
+      
+      // Store wallet in localStorage for persistence across sessions
+      try {
+        localStorage.setItem('xrpl_wallet', JSON.stringify(wallet));
+        console.log('Wallet saved to localStorage');
+      } catch (storageError) {
+        console.warn('Could not save wallet to localStorage:', storageError);
+      }
+      
+      return wallet;
     } catch (walletError) {
-      console.warn('Wallet generation via API failed, using master wallet:', walletError);
+      console.warn('Local wallet generation failed, using master wallet:', walletError);
+      
+      // If local generation fails, fall back to using the master wallet
+      console.log('Using master account as wallet');
+      return getMasterWallet();
     }
-    
-    // If wallet generation fails, fall back to using the master wallet
-    console.log('Using master account as wallet');
-    return getMasterWallet();
   } catch (error) {
     console.error('Failed to create test wallet:', error);
     throw error;
+  }
+}
+
+// Load wallet from localStorage if available
+export async function loadStoredWallet(): Promise<Wallet | null> {
+  try {
+    const storedWallet = localStorage.getItem('xrpl_wallet');
+    if (storedWallet) {
+      const wallet = JSON.parse(storedWallet) as Wallet;
+      console.log(`Loaded wallet from localStorage: ${wallet.address}`);
+      return wallet;
+    }
+    return null;
+  } catch (error) {
+    console.warn('Failed to load wallet from localStorage:', error);
+    return null;
   }
 }
 

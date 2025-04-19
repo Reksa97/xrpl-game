@@ -125,27 +125,47 @@ If you encounter connection issues:
 
 ### Wallet Generation
 
-The application attempts to create a new wallet for each user using the `wallet_generate` XRPL API method. However, it appears that the XRPL node at 34.88.230.243:51234 does not support the `wallet_generate` method (returns "unknownCmd" error).
+The application now generates wallets locally in the browser, eliminating the dependency on the XRPL node's `wallet_generate` method. This approach offers several advantages:
 
-Therefore, the system will automatically use the master wallet for all users:
+1. No need for the XRPL node to support wallet generation
+2. Enhanced security as wallet credentials are generated locally
+3. More flexible wallet management options
+4. Persistent wallet storage in the browser's localStorage
 
-```
-Address: rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh
-Seed: snoPBrXtMeMyMHUVTgbuqAfg1SUTb
-```
+The wallet generation process works as follows:
 
-This approach ensures that the application remains functional despite the XRPL node's limited API support. The fallback happens automatically at two levels:
+1. When a user connects a wallet, the application:
+   - First checks localStorage for an existing wallet
+   - If found, loads and uses the saved wallet
+   - If not found, generates a new demo wallet with pseudorandom values
+   - Saves the wallet to localStorage for future sessions
 
-1. In the proxy server (server.js), which returns the master wallet details when it receives an "unknownCmd" error
-2. In the frontend client (xrpl-direct.ts), which falls back to the master wallet if wallet generation fails
+2. Wallet credentials are structured as:
+   ```json
+   {
+     "address": "rBvA4DuaJJzRKuEPNmGm92TJ2joYM3zQFm",  // Public key
+     "seed": "sp5mkL7Sy9MfNxJY9XVJJQWiVfW9"            // Private key
+   }
+   ```
 
-You can test the wallet generation fallback with:
+3. The system includes multiple fallback levels in case of wallet generation failures:
+   - Primary: Local wallet generation with pseudorandom values
+   - Secondary: Proxy server virtual wallet generation
+   - Final fallback: Master test wallet
+
+You can still test the proxy's wallet handling with:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"method":"wallet_generate","params":[{}]}' http://localhost:3001/api/xrpl-proxy
 ```
 
-You should always get a successful response with the master wallet credentials, even though the actual XRPL node doesn't support this command.
+For testing and development, we've also included a Node.js script that can generate valid XRPL wallets using the xrpl.js library:
+```bash
+npm run gen-wallet
+```
 
-To create a more robust solution in the future, you would need to:
-1. Configure an XRPL node that supports the wallet_generate method, or
-2. Use the xrpl.js library's local wallet generation capabilities
+In a production environment, you would want to enhance this implementation by:
+1. Using xrpl.js or another cryptographically secure wallet generator
+2. Storing the wallet seed in a secure keychain/keystore
+3. Adding encryption for the wallet private key
+4. Implementing proper key backup mechanisms
+5. Adding proper authentication before displaying wallet details

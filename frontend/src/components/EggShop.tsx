@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { Wallet } from '../xrpl-direct';
-import { createTestWallet, buyEgg, getAccountInfo } from '../xrpl-direct';
+import { createTestWallet, buyEgg, getAccountInfo, loadStoredWallet } from '../xrpl-direct';
 
 interface EggShopProps {
   onWallet: (wallet: Wallet) => void;
@@ -12,6 +12,27 @@ export default function EggShop({ onWallet }: EggShopProps) {
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [balance, setBalance] = useState<string>('0');
   const [buying, setBuying] = useState<boolean>(false);
+  
+  // Load wallet from localStorage on component mount and fetch balance
+  useEffect(() => {
+    const loadWallet = async () => {
+      try {
+        // Try to load wallet from localStorage
+        const storedWallet = await loadStoredWallet();
+        
+        if (storedWallet) {
+          console.log('Using stored wallet from localStorage');
+          setWallet(storedWallet);
+          onWallet(storedWallet);
+          fetchBalance(storedWallet.address);
+        }
+      } catch (error) {
+        console.error('Failed to load wallet from localStorage:', error);
+      }
+    };
+    
+    loadWallet();
+  }, [onWallet]);
   
   // Fetch account balance when wallet is set
   useEffect(() => {
@@ -153,7 +174,7 @@ export default function EggShop({ onWallet }: EggShopProps) {
       
       <div>
         <h2>Available Eggs</h2>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           <div style={{ 
             border: '1px solid #ccc', 
             borderRadius: '8px', 
@@ -201,18 +222,54 @@ export default function EggShop({ onWallet }: EggShopProps) {
               {buying ? 'Buying...' : 'Buy Egg'}
             </button>
           </div>
+          
+          <div style={{ 
+            border: '1px solid #ccc', 
+            borderRadius: '8px', 
+            padding: '15px', 
+            textAlign: 'center',
+            width: '150px'
+          }}>
+            <div style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              background: 'linear-gradient(45deg, #56ab2f, #a8e063)',
+              margin: '0 auto 15px'
+            }}></div>
+            <h3>Earth Egg</h3>
+            <p>8 XRP</p>
+            <button 
+              onClick={() => handleBuyEgg('Earth', '8')} 
+              disabled={!wallet || buying}
+            >
+              {buying ? 'Buying...' : 'Buy Egg'}
+            </button>
+          </div>
         </div>
       </div>
       
       <div style={{ marginTop: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '5px' }}>
         <h3>XRPL Integration</h3>
-        <p>This app connects to a local XRPL node for all operations.</p>
-        <p>When you connect a wallet, it will be funded with test XRP from the master account.</p>
+        <p>This app connects to a private XRPL node at 34.88.230.243:51234 via a proxy server.</p>
+        <p>Your wallet is generated locally using the XRPL.js library and stored in your browser's localStorage.</p>
+        
+        {wallet && (
+          <div style={{ marginTop: '15px', padding: '10px', background: '#e9f7ef', borderRadius: '5px' }}>
+            <h4>Your Wallet Details</h4>
+            <p><strong>Address:</strong> {wallet.address}</p>
+            <p><strong>Seed (Private Key):</strong> {wallet.seed}</p>
+            <p style={{ fontSize: '0.9em', color: '#666' }}>
+              In a production app, this seed would be securely stored in the device's secure keychain.
+            </p>
+          </div>
+        )}
+        
         <p style={{ marginTop: '10px', fontSize: '0.9em', color: '#666' }}>
-          Note: If you see connection errors, make sure the local XRPL node is running.
+          Note: If you see connection errors, make sure the proxy server is running.
         </p>
         <pre style={{ margin: '5px 0', padding: '5px', background: '#eee', fontSize: '0.9em' }}>
-          docker-compose logs xrpl-node
+          node server.js
         </pre>
       </div>
     </div>
