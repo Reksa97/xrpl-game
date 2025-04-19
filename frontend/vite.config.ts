@@ -17,7 +17,7 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 3000,
+    port: 3002,
     strictPort: true,
     host: '0.0.0.0', // Allow connections from outside the container
     proxy: {
@@ -32,7 +32,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/oracle/, ''),
       },
       '/api/xrpl-proxy': {
-        target: 'http://xrpl-node:6006',
+        target: 'http://34.88.230.243:51234',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/xrpl-proxy/, ''),
       },
@@ -43,6 +43,7 @@ export default defineConfig({
     'process.env': {},
     'process.browser': true,
     'process.version': '"v16.0.0"',
+    'import.meta.env.VITE_EGG_SHOP_ADDR': '"rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"',
   },
   optimizeDeps: {
     esbuildOptions: {

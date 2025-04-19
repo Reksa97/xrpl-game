@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "vite",
     "start": "node server.js",
+    "start-dev": "./start-dev.sh",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-wallet": "node test-wallet-generation.js"
   },
   "dependencies": {
     "assert": "^2.1.0",
@@ -15,6 +17,7 @@
     "cors": "^2.8.5",
     "crypto-browserify": "^3.12.1",
     "express": "^5.1.0",
+    "node-fetch": "^2.6.7",
     "path": "^0.12.7",
     "react": "^18",
     "react-dom": "^18",

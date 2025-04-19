@@ -23,7 +23,9 @@ export default function EggShop({ onWallet }: EggShopProps) {
   const fetchBalance = async (address: string) => {
     try {
       setError('');
-      const accountData = await getAccountInfo(address);
+      // Create a temporary wallet object with just the address
+      const tempWallet: Wallet = { address, seed: '' };
+      const accountData = await getAccountInfo(tempWallet);
       // Convert from drops to XRP
       const xrpBalance = (parseInt(accountData.Balance) / 1000000).toFixed(2);
       setBalance(xrpBalance);

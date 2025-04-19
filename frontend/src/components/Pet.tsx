@@ -37,7 +37,9 @@ export default function Pet({ wallet }: PetProps) {
         
         // Always check the master account in standalone mode since that's where NFTs are minted
         console.log(`Fetching NFTs from ${isMasterAccount ? 'master account' : 'both wallet and master account'}`);
-        const ownedNFTs = await getOwnedNFTs(masterAccount);
+        // Create a temporary wallet object for the master account
+        const masterWallet: Wallet = { address: masterAccount, seed: '' };
+        const ownedNFTs = await getOwnedNFTs(masterWallet);
         
         // Compare with previous count to detect new NFTs
         const currentCount = ownedNFTs.length;
@@ -150,7 +152,7 @@ export default function Pet({ wallet }: PetProps) {
         
         while (retries > 0) {
           try {
-            ownedNFTs = await getOwnedNFTs(wallet.address);
+            ownedNFTs = await getOwnedNFTs(wallet);
             if (ownedNFTs.length > prevNftCountRef.current) {
               // Success! We found the new NFTs
               break;

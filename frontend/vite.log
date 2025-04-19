@@ -1,0 +1,9 @@
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+  VITE v5.4.18  ready in 69 ms
+
+  ➜  Local:   http://localhost:3002/
+  ➜  Network: http://192.168.10.216:3002/
+  ➜  Network: http://10.5.0.2:3002/
+12:42:12 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:43:19 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx

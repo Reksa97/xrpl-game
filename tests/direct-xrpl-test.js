@@ -17,8 +17,8 @@ const MASTER_WALLET = {
 
 // Configuration
 const config = {
-  wsUrl: 'ws://localhost:5005',
-  httpUrl: 'http://localhost:6006',
+  wsUrl: 'ws://34.88.230.243:51234',
+  httpUrl: 'http://34.88.230.243:80',
   timeout: 15000 // 15 seconds timeout
 };
 

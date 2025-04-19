@@ -44,7 +44,7 @@ export default function Battle({ wallet }: BattleProps) {
       setClaiming(true);
       
       // Call the XRPL reward claim function
-      await claimReward(wallet, result.spark);
+      await claimReward(wallet, String(result.spark));
       
       alert(`Successfully claimed ${result.spark} SPARK tokens!`);
       setResult(null);
