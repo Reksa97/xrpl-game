@@ -25,59 +25,105 @@ export default function Pet({ wallet }: PetProps) {
   const [lastMintedTokenId, setLastMintedTokenId] = useState<string | null>(null);
   const prevNftCountRef = useRef<number>(0);
   
-  useEffect(() => {
-    const fetchNFTs = async () => {
-      try {
-        setLoading(true);
-        
-        // In standalone mode, we mint to the master account
-        // So we need to fetch NFTs from both the wallet address and the master account
-        const masterAccount = 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh';
-        const isMasterAccount = wallet.address === masterAccount;
-        
-        // Always check the master account in standalone mode since that's where NFTs are minted
-        console.log(`Fetching NFTs from ${isMasterAccount ? 'master account' : 'both wallet and master account'}`);
-        // Create a temporary wallet object for the master account
-        const masterWallet: Wallet = { address: masterAccount, seed: '' };
-        const ownedNFTs = await getOwnedNFTs(masterWallet);
-        
-        // Compare with previous count to detect new NFTs
-        const currentCount = ownedNFTs.length;
-        const prevCount = prevNftCountRef.current;
-        
-        console.log(`Found ${currentCount} NFTs (previously had ${prevCount})`);
-        
-        // Mark new NFTs if count increased (and we're not initializing)
-        if (prevCount > 0 && currentCount > prevCount) {
-          const enhancedNFTs = ownedNFTs.map(nft => ({
-            ...nft,
-            // Mark as new if it matches our last minted token ID or if we don't have a specific ID
-            isNew: lastMintedTokenId ? nft.NFTokenID === lastMintedTokenId : true
-          }));
-          setNfts(enhancedNFTs);
-        } else {
-          setNfts(ownedNFTs);
-        }
-        
-        // Update the reference count
-        prevNftCountRef.current = currentCount;
-      } catch (err: any) {
-        console.error('Failed to fetch NFTs:', err);
-        // Show error in UI, but don't alert for account not found since it's expected
-        setNfts([]);
-        
-        if (!err.message?.includes('Account not found')) {
-          // Only show alert for unexpected errors
-          const message = err.message || 'Unknown error';
-          if (!message.includes('actNotFound')) {
-            alert(`XRPL Error: ${message}`);
-          }
-        }
-      } finally {
-        setLoading(false);
+  // State for account not found errors
+  const [accountError, setAccountError] = useState<string | null>(null);
+  const [isFunding, setIsFunding] = useState<boolean>(false);
+  
+  // Function to fund the wallet when it doesn't exist
+  const fundWallet = async () => {
+    try {
+      setIsFunding(true);
+      setAccountError('Funding account...');
+      
+      // Import the fundAccount function
+      const { fundAccount } = await import('../xrpl-direct');
+      
+      // Fund the wallet with 25 XRP
+      await fundAccount(wallet.address, '50'); // Increase amount to ensure it works
+      
+      // Wait for funding to complete
+      setAccountError('Funding complete. Waiting for account activation...');
+      
+      // Wait an additional 5 seconds for the transaction to be processed
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      // Clear the error and refetch NFTs
+      setAccountError(null);
+      await fetchNFTs();
+      
+      // If we still have an account error after refetching, try once more
+      if (accountError) {
+        setAccountError('Account may still be activating. Trying again...');
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        await fetchNFTs();
       }
-    };
-    
+    } catch (err: any) {
+      console.error('Failed to fund wallet:', err);
+      setAccountError(`Failed to fund account: ${err.message}`);
+    } finally {
+      setIsFunding(false);
+    }
+  };
+  
+  // Fetch NFTs with proper error handling
+  const fetchNFTs = async () => {
+    try {
+      setLoading(true);
+      setAccountError(null);
+      
+      // Fetch NFTs directly from the user's wallet
+      console.log(`Fetching NFTs from account: ${wallet.address}`);
+      
+      let ownedNFTs;
+      try {
+        ownedNFTs = await getOwnedNFTs(wallet);
+      } catch (nftError: any) {
+        // Check if it's an account not found error
+        if (nftError.message && (
+          nftError.message.includes('Account not found') ||
+          nftError.message.includes('actNotFound') ||
+          nftError.message.includes('needs to be funded')
+        )) {
+          setAccountError('Your account does not exist on the XRPL yet. It needs to be funded with XRP.');
+          setNfts([]);
+          return;
+        } else {
+          // For other errors, rethrow
+          throw nftError;
+        }
+      }
+      
+      // Compare with previous count to detect new NFTs
+      const currentCount = ownedNFTs.length;
+      const prevCount = prevNftCountRef.current;
+      
+      console.log(`Found ${currentCount} NFTs (previously had ${prevCount})`);
+      
+      // Mark new NFTs if count increased (and we're not initializing)
+      if (prevCount > 0 && currentCount > prevCount) {
+        const enhancedNFTs = ownedNFTs.map(nft => ({
+          ...nft,
+          // Mark as new if it matches our last minted token ID or if we don't have a specific ID
+          isNew: lastMintedTokenId ? nft.NFTokenID === lastMintedTokenId : true
+        }));
+        setNfts(enhancedNFTs);
+      } else {
+        setNfts(ownedNFTs);
+      }
+      
+      // Update the reference count
+      prevNftCountRef.current = currentCount;
+    } catch (err: any) {
+      console.error('Failed to fetch NFTs:', err);
+      // Show error in UI
+      setNfts([]);
+      setAccountError(`Error fetching NFTs: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
     fetchNFTs();
     // Set up polling for new NFTs
     const interval = setInterval(fetchNFTs, 10000);
@@ -102,17 +148,39 @@ export default function Pet({ wallet }: PetProps) {
       // Show status instead of alert for better UX
       setMintingStatus('Submitting NFT minting transaction to XRPL...');
       
-      const result = await mintNFT(wallet, eggUri);
-      console.log("Mint result:", result);
-      
-      if (result.verified) {
-        setMintingStatus('NFT minted successfully! Refreshing your collection...');
-      } else {
-        setMintingStatus('Transaction submitted. Waiting for confirmation...');
+      let result;
+      try {
+        result = await mintNFT(wallet, eggUri);
+        console.log("Mint result:", result);
+        
+        if (result && result.verified) {
+          setMintingStatus('NFT minted successfully! Refreshing your collection...');
+        } else {
+          setMintingStatus('Transaction submitted. Waiting for confirmation...');
+        }
+      } catch (mintError) {
+        console.error("Error during NFT minting:", mintError);
+        setMintingStatus('Error minting NFT. Using fallback approach...');
+        
+        // Fetch NFTs anyway to show what's available
+        const masterWallet = { 
+          address: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh', 
+          seed: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb' 
+        };
+        const existingNFTs = await getOwnedNFTs(masterWallet);
+        
+        // Use existing NFTs as fallback result
+        result = {
+          nfts: existingNFTs,
+          nft_count: existingNFTs.length,
+          verified: false,
+          error: mintError.message || 'Unknown minting error',
+          tx_hash: 'error-no-hash'
+        };
       }
       
       // If the result includes updated NFTs, use them directly
-      if (result.nfts && result.nfts.length > 0) {
+      if (result && result.nfts && result.nfts.length > 0) {
         console.log(`Setting ${result.nfts.length} NFTs from mint result`);
         
         // Identify the new NFT (if we can)
@@ -245,6 +313,46 @@ export default function Pet({ wallet }: PetProps) {
     return <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
       <h1>Your Eggs</h1>
       <p>Loading your NFTs...</p>
+    </div>;
+  }
+  
+  // Display account not found error with funding button
+  if (accountError) {
+    return <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+      <h1>Your Eggs</h1>
+      <div style={{ 
+        padding: '15px', 
+        backgroundColor: '#fff3cd', 
+        borderLeft: '4px solid #ffc107', 
+        marginBottom: '20px',
+        borderRadius: '4px'
+      }}>
+        <p style={{ margin: '0 0 10px 0', color: '#856404' }}>
+          <strong>Account Not Found</strong>
+        </p>
+        <p>{accountError}</p>
+        
+        <button 
+          onClick={fundWallet}
+          disabled={isFunding}
+          style={{ 
+            padding: '10px 15px', 
+            backgroundColor: '#4a90e2', 
+            color: 'white', 
+            border: 'none',
+            borderRadius: '4px',
+            marginTop: '10px',
+            cursor: isFunding ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {isFunding ? 'Funding...' : 'Fund My Account with 25 XRP'}
+        </button>
+      </div>
+      
+      <p>
+        The XRPL requires accounts to be funded with a minimum reserve of XRP before they can be used.
+        Click the button above to fund your account with 25 XRP from the master test account.
+      </p>
     </div>;
   }
   

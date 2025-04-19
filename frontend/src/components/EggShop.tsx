@@ -41,23 +41,39 @@ export default function EggShop({ onWallet }: EggShopProps) {
     }
   }, [wallet]);
   
-  const fetchBalance = async (address: string) => {
+  const [isFunding, setIsFunding] = useState<boolean>(false);
+  
+  const fundCurrentWallet = async () => {
+    if (!wallet) return;
+    
     try {
+      setIsFunding(true);
       setError('');
-      // Create a temporary wallet object with just the address
-      const tempWallet: Wallet = { address, seed: '' };
-      const accountData = await getAccountInfo(tempWallet);
-      // Convert from drops to XRP
-      const xrpBalance = (parseInt(accountData.Balance) / 1000000).toFixed(2);
-      setBalance(xrpBalance);
+      setBalance('Funding...');
+      
+      // Import the fundAccount function from xrpl-direct
+      const { fundAccount } = await import('../xrpl-direct');
+      
+      // Fund the wallet with 25 XRP
+      await fundAccount(wallet.address, '25');
+      
+      // Refresh balance after funding
+      await fetchBalance(wallet.address);
+      
+      // Show success message
+      setError(
+        <div style={{ color: 'green', marginBottom: '10px' }}>
+          Successfully funded your wallet with 25 XRP!
+        </div>
+      );
     } catch (err: any) {
-      console.error('Failed to fetch balance:', err);
+      console.error('Failed to fund wallet:', err);
       
       // Format error message
       const errorLines = (err.message || 'Unknown error').split('\n');
       const formattedError = (
         <>
-          <strong>XRPL Balance Error:</strong>
+          <strong>Funding Error:</strong>
           <div style={{ color: 'red', marginBottom: '10px' }}>{errorLines[0]}</div>
           {errorLines.length > 1 && (
             <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
@@ -68,9 +84,79 @@ export default function EggShop({ onWallet }: EggShopProps) {
       );
       
       setError(formattedError);
+    } finally {
+      setIsFunding(false);
+    }
+  };
+  
+  const fetchBalance = async (address: string) => {
+    try {
+      setError('');
+      // Create a temporary wallet object with just the address
+      const tempWallet: Wallet = { address, seed: '' };
+      const accountData = await getAccountInfo(tempWallet);
+      
+      // Convert from drops to XRP
+      const xrpBalance = (parseInt(accountData.Balance) / 1000000).toFixed(2);
+      setBalance(xrpBalance);
+    } catch (err: any) {
+      console.error('Failed to fetch balance:', err);
+      
+      // Check if this is an account not found error
+      const isAccountNotFound = err.message && (
+        err.message.includes('Account not found') || 
+        err.message.includes('actNotFound') ||
+        err.message.includes('needs to be funded')
+      );
+      
+      // Format error message
+      const errorLines = (err.message || 'Unknown error').split('\n');
+      
+      if (isAccountNotFound) {
+        // Special handling for account not found - offer to fund
+        const formattedError = (
+          <>
+            <div style={{ color: 'orange', marginBottom: '10px' }}>
+              This account doesn't exist on the XRPL yet. It needs to be funded with XRP.
+            </div>
+            <button 
+              onClick={fundCurrentWallet}
+              disabled={isFunding}
+              style={{ 
+                padding: '5px 10px', 
+                marginTop: '10px',
+                backgroundColor: '#4a90e2',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: isFunding ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {isFunding ? 'Funding...' : 'Fund with 25 XRP'}
+            </button>
+          </>
+        );
+        
+        setError(formattedError);
+      } else {
+        // Generic error handling
+        const formattedError = (
+          <>
+            <strong>XRPL Balance Error:</strong>
+            <div style={{ color: 'red', marginBottom: '10px' }}>{errorLines[0]}</div>
+            {errorLines.length > 1 && (
+              <div style={{ fontSize: '0.9em', color: '#666', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+                {errorLines.slice(1).join('\n')}
+              </div>
+            )}
+          </>
+        );
+        
+        setError(formattedError);
+      }
       
       // Set a default balance for UI not to break
-      setBalance('N/A');
+      setBalance('Not funded');
     }
   };
   

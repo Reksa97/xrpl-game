@@ -16,3 +16,517 @@
 12:50:01 PM [vite] hmr update /src/components/EggShop.tsx
 12:50:43 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
 12:51:13 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:53:44 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:54:50 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:55:03 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:55:14 PM [vite] hmr update /src/components/EggShop.tsx
+12:55:14 PM [vite] hmr update /src/components/EggShop.tsx
+12:56:35 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+12:56:49 PM [vite] hmr update /src/components/Pet.tsx
+12:56:49 PM [vite] hmr update /src/components/Pet.tsx
+12:56:57 PM [vite] hmr update /src/components/Pet.tsx
+12:56:58 PM [vite] hmr update /src/components/Pet.tsx
+12:58:14 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:02:02 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:02:22 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:03:37 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:03:58 PM [vite] hmr update /src/components/EggShop.tsx
+1:04:16 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:04:30 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:04:42 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:05:06 PM [vite] hmr update /src/components/Pet.tsx
+1:05:06 PM [vite] Internal server error: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx: Unexpected token (117:3)
+
+  115 |     const interval = setInterval(fetchNFTs, 10000);
+  116 |     return () => clearInterval(interval);
+> 117 |   }, [wallet, lastMintedTokenId]);
+      |    ^
+  118 |   
+  119 |   const handleMintEgg = async () => {
+  120 |     try {
+  Plugin: vite:react-babel
+  File: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx:117:3
+  115|      const interval = setInterval(fetchNFTs, 10000);
+  116|      return () => clearInterval(interval);
+  117|    }, [wallet, lastMintedTokenId]);
+     |     ^
+  118|    
+  119|    const handleMintEgg = async () => {
+      at constructor (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:360:19)
+      at TypeScriptParserMixin.raise (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3338:19)
+      at TypeScriptParserMixin.unexpected (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3358:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:11153:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:6950:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10785:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10770:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10750:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9690:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10603:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10608:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10585:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10538:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9639:20)
+      at TypeScriptParserMixin.parseExpressionBase (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10491:23)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:39
+      at TypeScriptParserMixin.allowInAnd (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12121:16)
+      at TypeScriptParserMixin.parseExpression (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:17)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12559:23)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9365:18)
+      at TypeScriptParserMixin.parseStatementLike (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12432:17)
+      at TypeScriptParserMixin.parseModuleItem (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12409:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12980:36)
+      at TypeScriptParserMixin.parseBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12973:10)
+      at TypeScriptParserMixin.parseProgram (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12306:10)
+      at TypeScriptParserMixin.parseTopLevel (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12296:25)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14152:10)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9982:18)
+      at parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14186:38)
+      at parser (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:261:32)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:189:28
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:113:33
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:287:14)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+1:05:20 PM [vite] hmr update /src/components/Pet.tsx
+1:05:20 PM [vite] Internal server error: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx: Unexpected token (117:3)
+
+  115 |     const interval = setInterval(fetchNFTs, 10000);
+  116 |     return () => clearInterval(interval);
+> 117 |   }, [wallet, lastMintedTokenId]);
+      |    ^
+  118 |   
+  119 |   const handleMintEgg = async () => {
+  120 |     try {
+  Plugin: vite:react-babel
+  File: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx:117:3
+  115|      const interval = setInterval(fetchNFTs, 10000);
+  116|      return () => clearInterval(interval);
+  117|    }, [wallet, lastMintedTokenId]);
+     |     ^
+  118|    
+  119|    const handleMintEgg = async () => {
+      at constructor (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:360:19)
+      at TypeScriptParserMixin.raise (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3338:19)
+      at TypeScriptParserMixin.unexpected (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3358:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:11153:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:6950:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10785:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10770:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10750:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9690:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10603:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10608:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10585:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10538:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9639:20)
+      at TypeScriptParserMixin.parseExpressionBase (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10491:23)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:39
+      at TypeScriptParserMixin.allowInAnd (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12121:16)
+      at TypeScriptParserMixin.parseExpression (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:17)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12559:23)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9365:18)
+      at TypeScriptParserMixin.parseStatementLike (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12432:17)
+      at TypeScriptParserMixin.parseModuleItem (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12409:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12980:36)
+      at TypeScriptParserMixin.parseBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12973:10)
+      at TypeScriptParserMixin.parseProgram (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12306:10)
+      at TypeScriptParserMixin.parseTopLevel (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12296:25)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14152:10)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9982:18)
+      at parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14186:38)
+      at parser (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:261:32)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:189:28
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:113:33
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:287:14)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+1:05:56 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:05:56 PM [vite] Internal server error: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx: Unexpected token (117:3)
+
+  115 |     const interval = setInterval(fetchNFTs, 10000);
+  116 |     return () => clearInterval(interval);
+> 117 |   }, [wallet, lastMintedTokenId]);
+      |    ^
+  118 |   
+  119 |   const handleMintEgg = async () => {
+  120 |     try {
+  Plugin: vite:react-babel
+  File: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx:117:3
+  115|      const interval = setInterval(fetchNFTs, 10000);
+  116|      return () => clearInterval(interval);
+  117|    }, [wallet, lastMintedTokenId]);
+     |     ^
+  118|    
+  119|    const handleMintEgg = async () => {
+      at constructor (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:360:19)
+      at TypeScriptParserMixin.raise (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3338:19)
+      at TypeScriptParserMixin.unexpected (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3358:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:11153:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:6950:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10785:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10770:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10750:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9690:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10603:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10608:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10585:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10538:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9639:20)
+      at TypeScriptParserMixin.parseExpressionBase (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10491:23)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:39
+      at TypeScriptParserMixin.allowInAnd (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12121:16)
+      at TypeScriptParserMixin.parseExpression (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:17)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12559:23)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9365:18)
+      at TypeScriptParserMixin.parseStatementLike (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12432:17)
+      at TypeScriptParserMixin.parseModuleItem (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12409:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12980:36)
+      at TypeScriptParserMixin.parseBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12973:10)
+      at TypeScriptParserMixin.parseProgram (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12306:10)
+      at TypeScriptParserMixin.parseTopLevel (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12296:25)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14152:10)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9982:18)
+      at parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14186:38)
+      at parser (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:261:32)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:189:28
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:113:33
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:287:14)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+1:06:09 PM [vite] Pre-transform error: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx: Unexpected token (117:3)
+
+  115 |     const interval = setInterval(fetchNFTs, 10000);
+  116 |     return () => clearInterval(interval);
+> 117 |   }, [wallet, lastMintedTokenId]);
+      |    ^
+  118 |   
+  119 |   const handleMintEgg = async () => {
+  120 |     try {
+1:06:10 PM [vite] Internal server error: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx: Unexpected token (117:3)
+
+  115 |     const interval = setInterval(fetchNFTs, 10000);
+  116 |     return () => clearInterval(interval);
+> 117 |   }, [wallet, lastMintedTokenId]);
+      |    ^
+  118 |   
+  119 |   const handleMintEgg = async () => {
+  120 |     try {
+  Plugin: vite:react-babel
+  File: /Users/reko/dev/xrpl/mica_sdk/frontend/src/components/Pet.tsx:117:3
+  115|      const interval = setInterval(fetchNFTs, 10000);
+  116|      return () => clearInterval(interval);
+  117|    }, [wallet, lastMintedTokenId]);
+     |     ^
+  118|    
+  119|    const handleMintEgg = async () => {
+      at constructor (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:360:19)
+      at TypeScriptParserMixin.raise (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3338:19)
+      at TypeScriptParserMixin.unexpected (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:3358:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:11153:16)
+      at TypeScriptParserMixin.parseExprAtom (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:6950:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10785:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10770:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10750:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9690:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10603:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10608:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10585:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10538:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9639:20)
+      at TypeScriptParserMixin.parseExpressionBase (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10491:23)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:39
+      at TypeScriptParserMixin.allowInAnd (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12121:16)
+      at TypeScriptParserMixin.parseExpression (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:10487:17)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12559:23)
+      at TypeScriptParserMixin.parseStatementContent (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9365:18)
+      at TypeScriptParserMixin.parseStatementLike (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12432:17)
+      at TypeScriptParserMixin.parseModuleItem (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12409:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12980:36)
+      at TypeScriptParserMixin.parseBlockBody (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12973:10)
+      at TypeScriptParserMixin.parseProgram (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12306:10)
+      at TypeScriptParserMixin.parseTopLevel (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:12296:25)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14152:10)
+      at TypeScriptParserMixin.parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:9982:18)
+      at parse (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/parser/lib/index.js:14186:38)
+      at parser (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:261:32)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:189:28
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:113:33
+      at step (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:287:14)
+      at /Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/Users/reko/dev/xrpl/mica_sdk/frontend/node_modules/gensync/index.js:223:11)
+1:06:30 PM [vite] hmr update /src/components/Pet.tsx
+1:07:20 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:07:28 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:08:34 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:11:37 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:11:47 PM [vite] hmr update /src/components/Pet.tsx
+1:14:36 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:14:45 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:14:55 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:15:05 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:15:05 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:16:51 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:16:59 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:17:10 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:19:49 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:20:05 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:20:48 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:21:11 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:12 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:15 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:25 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:30 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:33 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:36 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:40 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:44 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:44 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:46 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:23:53 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:24:01 PM [vite] vite.config.ts changed, restarting server...
+Re-optimizing dependencies because lockfile has changed
+1:24:01 PM [vite] server restarted.
+1:25:46 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:26:47 PM [vite] vite.config.ts changed, restarting server...
+1:26:47 PM [vite] server restarted.
+1:29:20 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:30:02 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:30:06 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:31:43 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:31:43 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+1:31:47 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+2:05:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:05:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:07:59 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:07:59 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:08:02 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:08:02 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:10:38 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:10:38 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:10:43 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:10:43 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:13:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:13:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:18 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:18 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:19 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:19 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:24 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:24 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:29 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:29 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:34 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:34 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:39 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:39 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:44 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:44 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:49 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:49 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:54 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:54 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:59 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:14:59 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:04 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:04 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:09 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:09 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:14 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:14 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:19 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:19 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:24 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:24 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:15:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:16:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:16:45 PM [vite] http proxy error: /api/xrpl-proxy
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at afterConnectMultiple (node:net:1712:7)
+2:22:43 PM [vite] hmr update /src/components/Battle.tsx, /src/components/EggShop.tsx, /src/components/Pet.tsx
+2:22:43 PM [vite] ✨ new dependencies optimized: xrpl
+2:22:43 PM [vite] ✨ optimized dependencies changed. reloading
+2:23:42 PM [vite] vite.config.ts changed, restarting server...
+2:23:42 PM [vite] server restarted.
+2:24:40 PM [vite] hmr update /src/components/EggShop.tsx, /src/components/Battle.tsx, /src/components/Pet.tsx
+2:24:49 PM [vite] hmr update /src/components/EggShop.tsx, /src/components/Battle.tsx, /src/components/Pet.tsx
