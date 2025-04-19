@@ -1,6 +1,6 @@
 # Creature Crafter Makefile
 
-.PHONY: dev backend frontend install-deps
+.PHONY: dev backend frontend install-deps firebase
 
 dev: install-deps
 	@echo "Starting frontend only..."
@@ -22,3 +22,7 @@ install-deps:
 		echo "Installing frontend dependencies..."; \
 		cd frontend && npm install; \
 	fi
+
+firebase:
+	@echo "Starting Firebase environment and running tests..."
+	@bash start-firebase.sh && bash run-firebase-tests.sh

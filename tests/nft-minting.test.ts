@@ -1,4 +1,5 @@
-import puppeteer, { Browser, Page } from 'puppeteer';
+import puppeteer, { Browser, Page } from "puppeteer";
+import { spawn } from "child_process";
 
 describe('NFT Minting Tests', () => {
   let browser: Browser;
@@ -6,7 +7,7 @@ describe('NFT Minting Tests', () => {
   
   // Set up browser before tests
   beforeAll(async () => {
-    // Launch browser with specific settings
+        // Launch browser with specific settings
     browser = await puppeteer.launch({
       headless: 'new', // Use the new headless mode
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -31,11 +32,118 @@ describe('NFT Minting Tests', () => {
   afterAll(async () => {
     await browser.close();
   });
-  
+
+    // Function to check if a process is running
+    const isProcessRunning = (
+        command: string,
+        args: string[] = []
+    ): Promise<boolean> => {
+        return new Promise((resolve) => {
+            const process = spawn(command, args);
+            process.on("error", () => resolve(false));
+            process.on("close", (code) => resolve(code === 0));
+        });
+    };
+
+    // Function to wait for a process to start
+    const waitForProcessStart = async (
+        command: string,
+        args: string[],
+        timeout: number = 30000
+    ): Promise<boolean> => {
+        const startTime = Date.now();
+        while (Date.now() - startTime < timeout) {
+            const running = await isProcessRunning(command, args);
+            if (running) {
+                return true;
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Check every second
+        }
+        return false;
+    };
+
+    // Function to start a process and wait for it to be accessible
+    const startProcessAndWait = async (
+        command: string,
+        args: string[],
+        logMessage: string,
+        waitCommand: string,
+        waitArgs: string[],
+        timeout: number = 30000
+    ): Promise<boolean> => {
+        console.log(logMessage);
+
+        const process = spawn(command, args);
+
+        process.stdout.on("data", (data) => {
+            console.log(`${logMessage} stdout: ${data}`);
+        });
+
+        process.stderr.on("data", (data) => {
+            console.error(`${logMessage} stderr: ${data}`);
+        });
+
+        process.on("close", (code) => {
+            console.log(`${logMessage} exited with code ${code}`);
+        });
+
+        return await waitForProcessStart(waitCommand, waitArgs, timeout);
+    };
+
+    beforeAll(async () => {
+        // Check if rippled is running and start it if it is not
+        const rippledRunning = await isProcessRunning("pgrep", ["-x", "rippled"]);
+        if (!rippledRunning) {
+            if (
+                !(await startProcessAndWait(
+                    "bash",
+                    ["start-firebase.sh"],
+                    "starting rippled",
+                    "pgrep",
+                    ["-x", "rippled"],
+                    60000
+                ))
+            ) {
+                console.error("❌ FAILURE: rippled did not start in time.");
+                process.exit(1);
+            }
+        } else {
+            console.log("rippled is already running.");
+        }
+
+        // Check if the backend is running and start it if it is not
+        const backendRunning = await isProcessRunning("pgrep", ["-f", "make run"]);
+        if (!backendRunning) {
+            console.log("starting backend");
+            if (
+                !(await startProcessAndWait("make", ["run"], "starting backend", "pgrep", ["-f", "make run"], 60000))
+            ) {
+                console.error("❌ FAILURE: backend did not start in time.");
+                process.exit(1);
+            }
+        } else {
+            console.log("backend is already running.");
+        }
+
+        // Check if the frontend is running and start it if it is not
+        const frontendRunning = await isProcessRunning("pgrep", ["-f", "npm run dev"]);
+        if (!frontendRunning) {
+            console.log("starting frontend");
+            if (
+                !(await startProcessAndWait("bash", ["-c", "cd frontend && npm run dev"], "starting frontend", "pgrep", ["-f", "npm run dev"], 60000))
+            ) {
+                console.error("❌ FAILURE: frontend did not start in time.");
+                process.exit(1);
+            }
+        } else {
+            console.log("frontend is already running.");
+        }
+    }, 120000);
+
   // Test case: Load the application and verify it renders
   test('Application loads successfully', async () => {
     await page.goto('http://localhost:3000');
-    
+
     // Wait for app to load - look for header elements
     await page.waitForSelector('h1');
     
@@ -44,11 +152,11 @@ describe('NFT Minting Tests', () => {
     expect(pageContent).toContain('Creature Crafter');
   });
   
-  // Test case: Check for XRPL connection
-  test('XRPL connects successfully', async () => {
+    // Test case: Check for XRPL connection
+    test("XRPL connects successfully", async () => {
     // Navigate to the Pet component which shows NFTs
-    await page.goto('http://localhost:3000');
-    
+        await page.goto("http://localhost:3000");
+
     // Click on "My Pets" link or button
     const petLinks = await page.$$('a');
     
@@ -66,18 +174,19 @@ describe('NFT Minting Tests', () => {
       () => !document.body.textContent?.includes('Loading') && 
              document.body.textContent?.includes('Eggs'),
       { timeout: 15000 }
-    );
+        );
     
     // Verify connection status by checking console logs or UI elements
     const logs = await page.evaluate(() => {
-      // Look for any XRPL connection success messages in the logs
-      // This is a simplification - real implementation would check specific connection success markers
-      const xrplMessages = Array.from(document.querySelectorAll('div'))
-        .filter(div => div.textContent?.includes('XRPL'));
-      return xrplMessages.length > 0;
-    });
+            // Look for any XRPL connection success messages in the logs
+            // This is a simplification - real implementation would check specific connection success markers
+            const xrplMessages = Array.from(document.querySelectorAll("div")).filter((div) =>
+                div.textContent?.includes("XRPL")
+            );
+            return xrplMessages.length > 0;
+        });
     
-    expect(logs).toBeTruthy();
+        expect(logs).toBeTruthy();
   });
   
   // Test case: Mint NFT with real XRPL node
@@ -117,7 +226,7 @@ describe('NFT Minting Tests', () => {
       });
       
       const nftsBefore = await nftsBeforeResponse.json();
-      console.log(`NFTs before test: ${nftsBefore.result?.account_nfts?.length || 0}`);
+            console.log(`NFTs before test: ${nftsBefore.result?.account_nfts?.length || 0}`);
     } catch (error) {
       console.error('Error accessing XRPL node:', error);
     }
@@ -274,7 +383,7 @@ describe('NFT Minting Tests', () => {
     console.log(`NFTs after test: ${nftCount}`);
     
     // Log all NFTs to verify
-    if (nftsAfter.result?.account_nfts) {
+        if (nftsAfter.result?.account_nfts) {
       nftsAfter.result.account_nfts.forEach((nft: any, index: number) => {
         console.log(`NFT ${index + 1}:`, nft.NFTokenID, nft.URI);
       });
